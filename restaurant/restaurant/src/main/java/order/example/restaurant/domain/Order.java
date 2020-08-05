@@ -1,11 +1,17 @@
 package order.example.restaurant.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 public class Order {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @NotEmpty
     @Size(min=4)
@@ -40,5 +46,13 @@ public class Order {
 
     public void setProcessed(boolean processed) {
         this.processed = processed;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

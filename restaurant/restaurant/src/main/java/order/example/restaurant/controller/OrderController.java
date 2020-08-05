@@ -2,9 +2,8 @@ package order.example.restaurant.controller;
 
 import order.example.restaurant.domain.Order;
 import order.example.restaurant.dto.OrderDTO;
-import order.example.restaurant.service.OrderServiceInt;
+import order.example.restaurant.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +19,7 @@ import javax.validation.Valid;
 public class OrderController {
 
     @Autowired
-    private OrderServiceInt serviceInt;
+    private OrderService serviceInt;
 
     @GetMapping
     public String getOrders(Model model){

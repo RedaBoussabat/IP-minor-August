@@ -11,9 +11,6 @@ public class OrderRepository {
     private List<Order> list;
 
     public OrderRepository() {
-        list = new ArrayList<>();
-        list.add(new Order("hank", "6545213", true));
-
     }
 
     public List<Order> getOrders() {

@@ -8,4 +8,5 @@ public interface ClientService {
     List<ClientDTO> getOrders();
 
     ClientDTO addClient(ClientDTO order);
+
 }

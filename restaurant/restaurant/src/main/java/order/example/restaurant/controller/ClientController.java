@@ -2,6 +2,7 @@ package order.example.restaurant.controller;
 
 import order.example.restaurant.dto.ClientDTO;
 import order.example.restaurant.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,13 @@ import javax.validation.Valid;
 @RequestMapping("/client")
 public class ClientController {
 
+    @Autowired
     private final ClientService service;
 
     public ClientController(ClientService service) {
         this.service = service;
     }
+
 
     @GetMapping
     public String getOrders(Model model){
@@ -42,4 +45,5 @@ public class ClientController {
         service.addClient(clientDTO);
         return "redirect:/client";
     }
+
 }

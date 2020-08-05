@@ -1,9 +1,7 @@
 package order.example.restaurant.controller;
 
-import order.example.restaurant.domain.Order;
-import order.example.restaurant.dto.OrderDTO;
-import order.example.restaurant.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import order.example.restaurant.dto.ClientDTO;
+import order.example.restaurant.service.ClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,30 +13,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("/client")
+public class ClientController {
 
-    @Autowired
-    private OrderService serviceInt;
+    private final ClientService service;
+
+    public ClientController(ClientService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public String getOrders(Model model){
-        model.addAttribute("orders", serviceInt.getOrders());
-        return "orders";
+        model.addAttribute("clients", service.getOrders());
+        return "clients";
     }
 
     @GetMapping("/create")
     public String getCreateOrderForm(Model model){
-        model.addAttribute("order", new OrderDTO());
+        model.addAttribute("client", new ClientDTO());
         return "form";
     }
 
     @PostMapping
-    public String postNewOrder(@ModelAttribute @Valid Order order, BindingResult bindingResult){
+    public String postNewOrder(@ModelAttribute @Valid ClientDTO clientDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "form";
         }
-        serviceInt.addOrder(order);
-        return "redirect:/order";
+        service.addClient(clientDTO);
+        return "redirect:/client";
     }
 }

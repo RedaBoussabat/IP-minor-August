@@ -10,10 +10,10 @@
         <th>Name</th>
         <th>Phone</th>
     </tr>
-    <tr th:each="order : ${orders}">
-        <td th:text="${order.name}"></td>
-        <td th:text="${order.phone}"></td>
-        <td th:text="${order.processed}"></td>
+    <tr th:each="client : ${clients}">
+        <td th:text="${client.name}"></td>
+        <td th:text="${client.phone}"></td>
+        <td th:text="${client.processed}"></td>
     </tr>
 </table>
 

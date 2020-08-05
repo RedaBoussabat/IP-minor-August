@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<h1>Create order</h1>
-<form action="/order" method="post" th:object="${order}">
+<h1>Create client</h1>
+<form action="/client" method="post" th:object="${client}">
     <p th:text="${#fields.globalErrors()}"></p>
     <div>
         <label for="name">Name</label>
@@ -22,7 +22,7 @@
         <label for="processed">Processed</label>
         <input for="processed" name="processed" type="checkbox" th:field="*{processed}">
     </div>
-    <input type="submit" value="Create order">
+    <input type="submit" value="Create client">
 </form>
 </body>
 </html>

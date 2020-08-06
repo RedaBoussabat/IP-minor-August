@@ -1,5 +1,6 @@
-/*
 package order.example.restaurant.dto;
+
+import order.example.restaurant.domain.Client;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,16 +8,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class DishDTO {
+    private Long id;
 
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Dishnaam mag niet leeg zijn")
     private String dish;
     private String description;
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
+    private Client client;
 
     public String getDish() {
         return dish;
@@ -41,5 +39,12 @@ public class DishDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }
-*/

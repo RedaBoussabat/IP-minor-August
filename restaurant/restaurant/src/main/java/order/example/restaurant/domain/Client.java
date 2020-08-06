@@ -1,10 +1,13 @@
 package order.example.restaurant.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import order.example.restaurant.dto.DishDTO;
+
+
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Client {
@@ -12,13 +15,33 @@ public class Client {
     @Id
     @GeneratedValue
     private Long id;
-
-    @NotEmpty
-    @Size(min=4)
+    @NotEmpty(message = "Naam mag niet leeg zijn")
     private String name;
+    @NotEmpty(message = "Nummer mag niet leeg zijn")
     private String phone;
     private boolean processed;
 
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<Dish> dishes;
+
+    public Client() {
+    }
+
+    public Client(Long id, String name, String phone, boolean processed){
+        setId(id);
+        setName(name);
+        setPhone(phone);
+        setProcessed(processed);
+        dishes = new ArrayList<>();
+    }
+
+    public Client(Long id, String name, String phone, boolean processed, List<Dish> dishes){
+        setId(id);
+        setName(name);
+        setPhone(phone);
+        setProcessed(processed);
+        setDishes(dishes);
+    }
 
     public Long getId() {
         return id;
@@ -52,5 +75,16 @@ public class Client {
         this.processed = processed;
     }
 
+    public List<Dish> getDishes() {
+        return dishes;
+    }
 
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
+    public void addDish(@Valid DishDTO dishDTO){
+        Dish dish = new Dish(dishDTO.getDish(), dishDTO.getDescription());
+        dishes.add(dish);
+    }
 }

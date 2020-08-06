@@ -1,22 +1,31 @@
-/*
 package order.example.restaurant.domain;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Dish {
-
-    @NotNull
-    @NotEmpty
-    private String dish;
-    private String description;
-
     @Id
     @GeneratedValue
     private Long id;
+    @NotEmpty(message = "Dishnaam mag niet leeg zijn")
+    private String dish;
+    private String description;
 
+   @ManyToOne
+   private Client client;
+
+    public Dish() {
+    }
+
+    public Dish(String dish, String description) {
+        setDish(dish);
+        setDescription(description);
+    }
 
     public String getDish() {
         return dish;
@@ -41,5 +50,12 @@ public class Dish {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }
-*/

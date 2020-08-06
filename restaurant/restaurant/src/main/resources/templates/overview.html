@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<h1>Restaurant</h1>
+
+<div th:if="${clients.isEmpty() == true}">
+    <p>No orders today Boss.</p>
+</div>
+
+<div th:if="${!clients.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Details</th>
+            <th>Number of dishes</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.name}"></td>
+            <td th:text="${client.phone}"></td>
+            <td><a th:href="@{/resto/{clientId}(clientId=${client.id})}">details</a></td>
+            <td th:text="${client.dishes.size()}"></td>
+            <td th:text="${client.processed}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<p><a th:href="@{/resto/new}">Maak een nieuwe order</a></p>
+
+</body>
+</html>

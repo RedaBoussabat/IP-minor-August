@@ -1,7 +1,9 @@
 package order.example.restaurant.service;
 
 import order.example.restaurant.domain.Client;
+import order.example.restaurant.domain.Dish;
 import order.example.restaurant.dto.ClientDTO;
+import order.example.restaurant.dto.DishDTO;
 import order.example.restaurant.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,29 +20,40 @@ public class ClientServiceImpl implements ClientService {
         this.repository = repository;
     }
 
+    @Override
+    public List<Client> getClients() {
+        return repository.findAll();
+    }
 
     @Override
-    public List<ClientDTO> getOrders(){
-        return repository.findAll().stream().map(this::convert).collect(Collectors.toList());
+    public void addClient(ClientDTO clientDTO) {
+        Client client = new Client(clientDTO.getId(), clientDTO.getName(), clientDTO.getPhone(),clientDTO.isProcessed());
+        repository.saveAndFlush(client);
     }
-
 
     @Override
-    public ClientDTO addClient(ClientDTO clientDTO){
-        Client client = new Client();
-        client.setName(clientDTO.getName());
-        client.setPhone(clientDTO.getPhone());
-        client.setProcessed(clientDTO.isProcessed());
-        this.repository.save(client);
-        return convert(client);
+    public Client getClient(long clientId) {
+        return repository.findById(clientId).orElse(null);
     }
 
-    private ClientDTO convert(Client client){
-        ClientDTO clientDTO = new ClientDTO();
-        clientDTO.setId(client.getId());
-        clientDTO.setName(client.getName());
-        clientDTO.setPhone(client.getPhone());
-        clientDTO.setProcessed(client.isProcessed());
-        return clientDTO;
+    @Override
+    public List<Dish> getDishes(long clientId) {
+        Client client = repository.findById(clientId).orElse(null);
+        if(client == null){
+            return null;
+        } else {
+            return client.getDishes();
+        }
     }
+
+    @Override
+    public void addDish(DishDTO dishDTO, long clientId) {
+        Client client = repository.findById(clientId).orElse(null);
+        if(client != null){
+            client.addDish(dishDTO);
+            repository.saveAndFlush(client);
+        }
+    }
+
+
 }

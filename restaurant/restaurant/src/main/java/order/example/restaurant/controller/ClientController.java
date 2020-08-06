@@ -79,11 +79,13 @@ public class ClientController {
      */
 
     @GetMapping("{clientId}/dish/create")
-    public String getDishForm(@PathVariable @Valid DishDTO dishDTO, BindingResult bindingResult, Model model, @RequestParam(value = "clientId") Integer clientId){
+    public String getDishForm(@PathVariable int clientId, Model model){
         model.addAttribute("client", service.getClient(clientId));
-        model.addAttribute("dish", new DishDTO());
+        model.addAttribute("dishDTO", new DishDTO());
         return "newDish";
     }
+
+
 
     @PostMapping("dish/newClient")
     public String postNewDish(@ModelAttribute @Valid DishDTO dishDTO, BindingResult bindingResult, Model model, @RequestParam(value = "clientId") Integer clientId){
@@ -95,6 +97,17 @@ public class ClientController {
         return "redirect:/resto/" + clientId;
     }
 
+     /*
+    **
+    * ***
+    * ****
+    PROCESS
+    */
 
+     @GetMapping("/{clientId}/process")
+    public String getProcessPage(@PathVariable int orderId, Model model){
+         model.addAttribute("orderToProcess", service.getClient(orderId));
+         return "processed";
+     }
 
 }

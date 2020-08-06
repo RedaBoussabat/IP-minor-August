@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<h1>Restaurant new dish</h1>
+<div>
+    <h2>Client Info</h2>
+    <p th:text="${client.id}"> ID:</p>
+    <p th:text="${client.name}">Name:</p>
+    <p th:text="${client.phone}">Phone:</p>
+    <p th:text="${client.processed}">Processed:</p>
+</div>
+
+<div>
+    <h2>New Dish</h2>
+    <form action="/resto/dish/newClient" method="post" th:object="${dishDTO}">
+
+        <label for="dish" class="formtitle">Dish</label>
+        <input type="text" id="dish" th:field="*{dish}">
+        <p th:errors="*{dish}"></p>
+
+        <label for="description" class="formdescription">Description</label>
+        <input type="text" id="description" th:field="*{description}" >
+        <p th:erros="*{description}"></p>
+
+        <input type="hidden" th:value="${clientId}" name="clientId">
+        <input type="submit" value="Add Dish">
+    </form>
+</div>
+<p><a th:href="@{/resto/new}">Maak een nieuwe order</a></p>
+
+</body>
+</html>

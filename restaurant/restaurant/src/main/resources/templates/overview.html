@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Restaurant</title>
@@ -17,8 +18,8 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Phone</th>
             <th>Details</th>
+            <th>Add Dish</th>
             <th>Number of dishes</th>
             <th>Done</th>
         </tr>
@@ -27,8 +28,8 @@
         <tr th:each="client : ${clients}">
             <td th:text="${client.id}"></td>
             <td th:text="${client.name}"></td>
-            <td th:text="${client.phone}"></td>
             <td><a th:href="@{/resto/{clientId}(clientId=${client.id})}">details</a></td>
+            <td><a th:href="@{/resto/{clientId}/dish/create(clientId=${client.id})}">add dish</a></td>
             <td th:text="${client.dishes.size()}"></td>
             <td th:text="${client.processed}"></td>
         </tr>

@@ -34,6 +34,11 @@
          </tr>
          </tbody>
      </table>
+     <form action="/resto/" method="post" th:object="${clientDTO}">
+         <label for="processed">Has order been processed?</label>
+         <input type="checkbox" id="processed" name="processed" value="processed">
+         <input type="submit" value="Submit">
+     </form>
  </div>
 
 <p><a th:href="@{/resto}">Go back to Overview</a></p>

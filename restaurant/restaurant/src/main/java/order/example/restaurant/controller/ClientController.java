@@ -104,10 +104,9 @@ public class ClientController {
     PROCESS
     */
 
-     @GetMapping("/{clientId}/process")
-    public String getProcessPage(@PathVariable int orderId, Model model){
-         model.addAttribute("orderToProcess", service.getClient(orderId));
-         return "processed";
-     }
+    @GetMapping("process")
+    public String procesClient(@PathVariable int clientId, Model model){
+        return "redirect:/resto/";
+    }
 
 }

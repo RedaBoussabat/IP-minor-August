@@ -4,14 +4,17 @@ import order.example.restaurant.domain.Dish;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 public class ClientDTO {
 
     private Long id;
+    @NotNull
     @NotEmpty(message = "Naam mag niet leeg zijn")
     private String name;
+    @NotNull
     @NotEmpty(message = "Nummer mag niet leeg zijn")
     private String phone;
     private boolean processed;

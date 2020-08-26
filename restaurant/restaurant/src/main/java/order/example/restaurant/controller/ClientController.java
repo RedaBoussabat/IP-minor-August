@@ -47,7 +47,7 @@ public class ClientController {
     }
 
     @PostMapping("new")
-    public String PostNewClient(@ModelAttribute @Valid ClientDTO clientDTO, BindingResult bindingResult, Model model){
+    public String PostNewClient(@ModelAttribute("clientDTO") @Valid ClientDTO clientDTO, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             return "newClient";
         } else {
@@ -104,9 +104,18 @@ public class ClientController {
     PROCESS
     */
 
-    @GetMapping("process")
+    @GetMapping("{clientId}/process")
     public String procesClient(@PathVariable int clientId, Model model){
-        return "redirect:/resto/";
+        model.addAttribute("client", service.getClient(clientId));
+        return "process";
+    }
+
+    @PostMapping("/process")
+    public String processClientChoose(@RequestParam(value = "confirmation") String confirmation, @RequestParam(value = "clientId") Integer clientId){
+        if(confirmation.equals("yes")){
+            service.getClient(clientId).setProcessed();
+        }
+        return "redirect:/resto";
     }
 
 }

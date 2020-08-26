@@ -1,11 +1,13 @@
 package order.example.restaurant.domain;
 
+
 import order.example.restaurant.dto.DishDTO;
 
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,10 @@ public class Client {
     @Id
     @GeneratedValue
     private Long id;
+    @NotNull
     @NotEmpty(message = "Naam mag niet leeg zijn")
     private String name;
+    @NotNull
     @NotEmpty(message = "Nummer mag niet leeg zijn")
     private String phone;
     private boolean processed;
@@ -31,7 +35,7 @@ public class Client {
         setId(id);
         setName(name);
         setPhone(phone);
-        setProcessed(processed);
+        this.processed = false;
         dishes = new ArrayList<>();
     }
 
@@ -39,7 +43,7 @@ public class Client {
         setId(id);
         setName(name);
         setPhone(phone);
-        setProcessed(processed);
+        this.processed = false;
         setDishes(dishes);
     }
 
@@ -71,8 +75,8 @@ public class Client {
         return processed;
     }
 
-    public void setProcessed(boolean processed) {
-        this.processed = processed;
+    public void setProcessed() {
+        this.processed = true;
     }
 
     public List<Dish> getDishes() {

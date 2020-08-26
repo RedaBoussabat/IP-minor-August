@@ -12,6 +12,7 @@ public class Dish {
     @Id
     @GeneratedValue
     private Long id;
+    @NotNull
     @NotEmpty(message = "Dishnaam mag niet leeg zijn")
     private String dish;
     private String description;

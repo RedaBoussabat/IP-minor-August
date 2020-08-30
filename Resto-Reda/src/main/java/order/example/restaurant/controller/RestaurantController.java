@@ -108,4 +108,30 @@ public class RestaurantController {
         return "redirect:/resto/" + UUID.fromString(id);
     }
 
+    /*
+     * *
+     * **PROCESS**
+     * *
+     */
+    @GetMapping("/process/{id}")
+    public String processOrder(@PathVariable("id") String id, Model model){
+        try {
+            ClientOrderDTO clientOrderDTO = restoServiceImp.getOrderDTO(UUID.fromString(id));
+            model.addAttribute("order", clientOrderDTO);
+        } catch (IllegalArgumentException e){
+            e.printStackTrace();
+            model.addAttribute("order", null);
+        }
+        return "process";
+    }
+
+    @PostMapping("/process")
+    public String finishOrder(@RequestParam(value = "orderId") String id, @RequestParam(value = "confirmation") String confirmation){
+        if (confirmation.equals("yes")){
+            restoServiceImp.process(id);
+            return "redirect:/resto/" + id;
+        }
+        return "redirect:/resto/overview";
+    }
+
 }

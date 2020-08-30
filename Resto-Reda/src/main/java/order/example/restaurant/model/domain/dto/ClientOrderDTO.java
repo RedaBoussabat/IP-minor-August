@@ -51,6 +51,14 @@ public class ClientOrderDTO {
         this.phone = phone;
     }
 
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+
     public List<DishDTO> getDishList() {
         return new ArrayList<>(dishList);
     }

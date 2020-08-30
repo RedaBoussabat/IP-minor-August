@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<h1>Process Order</h1>
+<div th:insert="nav"/>
+<h3>Order Details </h3>
+
+<p th:text="'Is order van ' + ${order.name} + ' klaar?'"/>
+<form th:action="@{/resto/process}" method="post">
+    <input type="radio" id="yes" name="confirmation" value="yes" checked>
+    <label for="yes">Yes</label><br>
+    <input type="radio" id="no" name="confirmation" value="no">
+    <label for="no">No</label><br>
+
+    <input type="hidden" th:value="${order.uuid}" name="orderId">
+    <input type="submit" value="Submit">
+</form>
+</body>

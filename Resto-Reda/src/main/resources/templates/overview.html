@@ -17,7 +17,7 @@
         <tr>
             <th>ID</th>
             <th>NAME</th>
-            <th>NUMBER OF DISHES</th>
+            <th># DISHES</th>
         </tr>
         <tr th:each="order : ${orders}">
             <td th:text="${order.uuid}"/>
@@ -25,6 +25,7 @@
             <td th:text="${order.dishList.size()}"/>
             <td><button type="button"><a th:href="@{/resto/__${order.uuid}__}">details</a></button><td/>
             <td><a th:href="@{/resto/__${order.uuid}__/dish/create}">add dish</a><td/>
+            <td th:text="${order.processed}"/>
         </tr>
     </table>
 </div>
@@ -32,7 +33,7 @@
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
-        width: 80%;
+        width: 100%
     }
 
     td, th {

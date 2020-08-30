@@ -13,6 +13,7 @@
     <p th:text="'ID client: ' + ${order.uuid}"/>
     <p th:text="'Name client: ' + ${order.name}"/>
     <p th:text="'Phone client: ' + ${order.phone}"/>
+    <a th:href="@{/resto/process/__${order.uuid}__}" th:text="${order.processed}"></a>
 </div>
 
 <table>

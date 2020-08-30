@@ -99,8 +99,12 @@ public class ClientOrder {
         this.phone = phone;
     }
 
-    public void process() {
-        processed = true;
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 
 

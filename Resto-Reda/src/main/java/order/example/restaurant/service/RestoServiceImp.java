@@ -66,4 +66,16 @@ public class RestoServiceImp implements RestoService {
     }
 
 
+    @Override
+    public void process(String id) {
+        if (orderRepository.findById(UUID.fromString(id)).isPresent()){
+            ClientOrder clientToProcess = orderRepository.findById(UUID.fromString(id)).get();
+            System.out.println(clientToProcess.isProcessed());
+            clientToProcess.setProcessed(true);
+            System.out.println(clientToProcess.isProcessed());
+            orderRepository.save(clientToProcess);
+        }
+    }
+
+
 }

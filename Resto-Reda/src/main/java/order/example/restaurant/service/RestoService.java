@@ -15,4 +15,6 @@ public interface RestoService {
     ClientOrderDTO getOrderDTO(UUID uuid);
 
     void addDish(UUID uuid, DishDTO dishDTO);
+
+    void process(String id);
 }

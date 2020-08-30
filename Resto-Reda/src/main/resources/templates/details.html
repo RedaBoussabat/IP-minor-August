@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<h1>Order Detail</h1>
+<div th:insert="nav"/>
+<h3>Order Details </h3>
+
+<div th:if="${order != null}">
+    <p th:text="'ID client: ' + ${order.uuid}"/>
+    <p th:text="'Name client: ' + ${order.name}"/>
+    <p th:text="'Phone client: ' + ${order.phone}"/>
+</div>
+
+<table>
+    <tr>
+        <th>Dish name</th>
+        <th>Dish description</th>
+    </tr>
+    <tr th:each="dish : ${dishes}">
+        <td th:text="${dish.dishName}"/>
+        <td th:text="${dish.dishDescription}"/>
+    </tr>
+</table>
+</body>
+</html>

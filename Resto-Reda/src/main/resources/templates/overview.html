@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<h1>Restaurant Overview</h1>
+<div th:insert="nav"/>
+<br>
+<h2>Orders</h2>
+<div th:if="${orders.isEmpty()}">
+    <p>No order today boss</p>
+</div>
+<div th:if="${!orders.isEmpty()}">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>NUMBER OF DISHES</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.uuid}"/>
+            <td th:text="${order.name}"/>
+            <td th:text="${order.dishList.size()}"/>
+            <td><button type="button"><a th:href="@{/resto/__${order.uuid}__}">details</a></button><td/>
+            <td><a th:href="@{/resto/__${order.uuid}__/dish/create}">add dish</a><td/>
+        </tr>
+    </table>
+</div>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    button>a:link {
+        text-decoration: none;
+        color: black;
+        font-size: larger;
+    }
+</style>
+</body>
+</html>

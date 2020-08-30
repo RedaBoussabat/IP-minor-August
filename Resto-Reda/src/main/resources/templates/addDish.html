@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<h1>Order Dish</h1>
+<div th:insert="nav"/>
+<h3>Order Dish </h3>
+
+<div th:if="${order != null}">
+    <p th:text="'ID client: ' + ${order.uuid}"/>
+    <p th:text="'Name client: ' + ${order.name}"/>
+    <p th:text="'Phone client: ' + ${order.phone}"/>
+</div>
+
+<form th:action="@{/resto/dish/addDish}" method="post" th:object="${dish}">
+    <div>
+        <label for="dishName" >Dish Name</label><br>
+        <input type="text" name="dishName" id="dishName"><br>
+    </div>
+
+    <div>
+        <label for="dishDescription">Dish Description</label><br>
+        <input type="text" name="dishDescription" id="dishDescription"><br><br>
+    </div>
+    <input type="hidden" th:value="${order.uuid}" name="orderId">
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
